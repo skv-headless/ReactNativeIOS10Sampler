@@ -1,0 +1,3 @@
+rootProject.name = 'ReactNativeIOS10Sampler'
+
+include ':app'
