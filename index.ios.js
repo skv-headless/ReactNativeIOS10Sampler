@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -10,6 +11,7 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental;
 import List from './components/List';
+import Fonts from './components/Fonts';
 
 function createReducer(initialState) {
   return (currentState = initialState, action) => {
@@ -52,8 +54,16 @@ class ReactNativeIOS10Sampler extends Component {
     />;
   }
 
-  renderScene() {
-    return <List />;
+  renderScene(props) {
+    const key = props.scene.route.key;
+
+    if (key === 'fonts') {
+      return <Fonts />;
+    }
+
+    return <List
+      navigate={this.navigate.bind(this)}
+    />;
   }
 
   renderHeader(props) {
@@ -70,7 +80,7 @@ class ReactNativeIOS10Sampler extends Component {
 
   renderTitleComponent(props) {
     return <NavigationHeader.Title>
-      iOS 10 Sampler
+      {_.get(props, 'scene.route.title', 'iOS 10 Sampler')}
     </NavigationHeader.Title>;
   }
 

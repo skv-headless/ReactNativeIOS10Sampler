@@ -4,9 +4,12 @@ import {
   Text,
   View,
   ListView,
+  TouchableOpacity,
 } from 'react-native';
+import Separator from './Separator';
 
 export default class List extends Component {
+
   constructor() {
     super();
 
@@ -72,6 +75,7 @@ export default class List extends Component {
         {
           title: 'New Fonts',
           description: 'New Fonts gallery',
+          id: 'fonts',
         },
         {
           title: 'Proactive: Location Suggestions',
@@ -87,27 +91,36 @@ export default class List extends Component {
 
   render() {
     return <ListView
+      style={styles.list}
       dataSource={this.state.dataSource}
       renderRow={this.renderRow.bind(this)}
-      renderSeparator={(sectionID, rowID) => <View key={rowID} style={styles.separator} />}
+      renderSeparator={(sectionID, rowID) => <Separator key={rowID} />}
     />;
   }
 
   renderRow(rowData) {
-    return <View style={styles.feature}>
+    return <TouchableOpacity style={styles.feature} onPress={this.handlePress.bind(this, rowData)}>
       <Text style={styles.title}>{rowData.title}</Text>
       <Text style={styles.description}>{rowData.description}</Text>
-    </View>;
+    </TouchableOpacity>;
+  }
+
+  handlePress(feature) {
+    this.props.navigate({
+      payload: {key: 'fonts', title: feature.title, id: feature.id},
+      type: 'push',
+    });
   }
 }
 
 const styles = StyleSheet.create({
-  separator: {
-    backgroundColor: '#d1d1d4',
-    height: 1,
+  list: {
+    paddingLeft: 15,
+    backgroundColor: 'white',
   },
   feature: {
-    padding: 15,
+    paddingVertical: 15,
+    paddingRight: 15,
   },
   title: {
     color: '#007aff',
