@@ -67,6 +67,7 @@ export default class List extends Component {
         {
           title: 'TabBar Customization',
           description: 'Customization sample for UITabBar\'s badge using text attributes.',
+          id: 'tabbar',
         },
         {
           title: 'New filters',
@@ -107,7 +108,7 @@ export default class List extends Component {
 
   handlePress(feature) {
     this.props.navigate({
-      payload: {key: 'fonts', title: feature.title, id: feature.id},
+      payload: {key: feature.id, title: feature.title, id: feature.id},
       type: 'push',
     });
   }

@@ -12,6 +12,7 @@ const {
 } = NavigationExperimental;
 import List from './components/List';
 import Fonts from './components/Fonts';
+import TabBar from './components/TabBar';
 
 function createReducer(initialState) {
   return (currentState = initialState, action) => {
@@ -61,16 +62,16 @@ class ReactNativeIOS10Sampler extends Component {
       return <Fonts />;
     }
 
+    if (key === 'tabbar') {
+      return <TabBar />;
+    }
+
     return <List
       navigate={this.navigate.bind(this)}
     />;
   }
 
   renderHeader(props) {
-    if (props.scene.route.noHeader) {
-      return null;
-    }
-
     return <NavigationHeader
       {...props}
       onNavigateBack={this.handleBackAction.bind(this)}
