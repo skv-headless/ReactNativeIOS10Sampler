@@ -19,6 +19,7 @@ export default class List extends Component {
         {
           title: 'Speech Recognition',
           description: 'Speech Recognition demo using Speech Framework. All available languages can be selected.',
+          id: 'speach-recognition',
         },
         {
           title: 'Looper',

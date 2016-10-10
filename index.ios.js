@@ -13,6 +13,7 @@ const {
 import List from './components/List';
 import Fonts from './components/Fonts';
 import TabBar from './components/TabBar';
+import SpeechRecognition from './components/SpeechRecognition';
 
 function createReducer(initialState) {
   return (currentState = initialState, action) => {
@@ -64,6 +65,10 @@ class ReactNativeIOS10Sampler extends Component {
 
     if (key === 'tabbar') {
       return <TabBar />;
+    }
+
+    if (key === 'speach-recognition') {
+      return <SpeechRecognition />;
     }
 
     return <List
