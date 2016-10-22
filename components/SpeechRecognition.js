@@ -5,25 +5,37 @@ import {
   View,
   Text,
   TouchableOpacity,
+  NativeModules,
 } from 'react-native';
+
+const SpeechRecognizerManager = NativeModules.SpeechRecognizerManager;
 
 export default class SpeechRecognition extends Component {
 
   constructor() {
     super();
     this.state = {
-      language: 'js',
-    }
+      locales: [],
+      locale: null,
+    };
+  }
+
+  componentDidMount() {
+    SpeechRecognizerManager.supportedLocales((error, locales) => {
+      console.log(locales);
+      this.setState({locales});
+    });
   }
 
   render() {
     return <View style={styles.container}>
       <Picker
-        selectedValue={this.state.language}
-        onValueChange={(lang) => this.setState({language: lang})}
+        selectedValue={this.state.locale}
+        onValueChange={(locale) => this.setState({locale})}
       >
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
+        {this.state.locales.map((locale) => {
+          return <Picker.Item label={locale} value={locale} />
+        })}
       </Picker>
 
       <TouchableOpacity
