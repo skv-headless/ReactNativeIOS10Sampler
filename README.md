@@ -71,6 +71,10 @@ Simple Core Data stack using NSPersistentContainer.
 
 Customization sample for UITabBar's badge using text attributes.
 
+https://github.com/facebook/react-native/pull/10315
+
+https://github.com/facebook/react-native/pull/10241
+
 ###New filters
 
 New filters of CIFilter in Core Image.
