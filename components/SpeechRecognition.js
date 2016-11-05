@@ -22,7 +22,6 @@ export default class SpeechRecognition extends Component {
 
   componentDidMount() {
     SpeechRecognizerManager.supportedLocales((error, locales) => {
-      console.log(locales);
       this.setState({locales});
     });
   }
@@ -34,7 +33,7 @@ export default class SpeechRecognition extends Component {
         onValueChange={(locale) => this.setState({locale})}
       >
         {this.state.locales.map((locale) => {
-          return <Picker.Item label={locale} value={locale} />
+          return <Picker.Item label={locale} value={locale} key={locale}/>
         })}
       </Picker>
 
