@@ -17,12 +17,19 @@ export default class SpeechRecognition extends Component {
     this.state = {
       locales: [],
       locale: null,
+      authorized: false,
     };
   }
 
   componentDidMount() {
     SpeechRecognizerManager.supportedLocales((error, locales) => {
       this.setState({locales});
+    });
+
+    SpeechRecognizerManager.requestAuthorization((error, authState) => {
+      if (authState === 'authorized') {
+        this.setState({authorized: true});
+      }
     });
   }
 
@@ -37,12 +44,14 @@ export default class SpeechRecognition extends Component {
         })}
       </Picker>
 
-      <TouchableOpacity
-        style={styles.record}
-        onPress={() => {}}
-      >
-        <Text style={styles.recordText}>Record</Text>
-      </TouchableOpacity>
+      {this.state.authorized &&
+        <TouchableOpacity
+          style={styles.record}
+          onPress={() => {}}
+        >
+          <Text style={styles.recordText}>Record</Text>
+        </TouchableOpacity>
+      }
     </View>;
   }
 }
